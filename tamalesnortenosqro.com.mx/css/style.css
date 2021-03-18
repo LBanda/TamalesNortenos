@@ -181,3 +181,22 @@ p {
 .tamales-nuestros-sabores-content-texto-der-row-1 {
     width: 100%;
 }
+
+
+
+/* Entregas */
+
+.tamales-entregas {
+    height: 548px;
+    background-color: #F5BD7A;
+    margin-top: -3%;
+}
+
+.tamales-entregas .tamales-entregas-titulo {
+    text-align: center;
+}
+.tamales-entregas .tamales-entregas-seleccionador {
+    margin-left: 45%;
+    width:15%;
+    height: 5%;
+}
