@@ -20,6 +20,7 @@ h4 {
     /* color:#1b1d1e; */
     color:white;
 }
+
  hr {
     border: 1.2px solid #7E9920;
 } 
@@ -194,6 +195,7 @@ p {
 
 .tamales-entregas .tamales-entregas-titulo {
     text-align: center;
+    color:white;
 }
 .tamales-entregas .tamales-entregas-seleccionador {
     margin-left: 45%;
@@ -202,9 +204,15 @@ p {
 }
 .tamales-entregas .tamales-entregas-subtitulo{
     text-align: center;
-   
+    font-family: fantasy; 
+    font-size: 20px;    
 }
 
+.tamales-entregas .tamales-entregas-texto{
+    text-align: left;
+    font-family: monospace; 
+    font-size: 15px;  
+}
 .tamales-entregas .tamales-entregas-tabla{
     text-align: center;
     margin-left: 30%;
@@ -221,3 +229,4 @@ border: 1px solid rgba(200, 100, 0, 0.3);
     background: rgba(4, 126, 59, 0.3); 
     border: 1px solid rgba(200, 100, 0, 0.3);
     }
+
