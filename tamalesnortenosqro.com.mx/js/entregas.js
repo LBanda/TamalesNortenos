@@ -14,7 +14,7 @@ for (i = 0; i < l; i++) {
     b = document.createElement("DIV");
     b.setAttribute("class", "select-items select-hide");
     for (j = 1; j < ll; j++) {
-        /*for each option in the original select element,
+        /*for each option in the original select element, 
         create a new DIV that will act as an option item:*/
         c = document.createElement("DIV");
         c.innerHTML = selElmnt.options[j].innerHTML;

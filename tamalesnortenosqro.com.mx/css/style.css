@@ -187,7 +187,7 @@ p {
 /* Entregas */
 
 .tamales-entregas {
-    height: 548px;
+    height: 735px;
     background-color: #F5BD7A;
     margin-top: -3%;
 }
@@ -200,3 +200,24 @@ p {
     width:15%;
     height: 5%;
 }
+.tamales-entregas .tamales-entregas-subtitulo{
+    text-align: center;
+   
+}
+
+.tamales-entregas .tamales-entregas-tabla{
+    text-align: center;
+    margin-left: 30%;
+}
+.tamales-entregas .tamales-entregas-estilo1{
+    background: rgba(4, 245, 152, 0.3); 
+    border: 1px solid rgba(200, 100, 0, 0.3);
+    }
+.tamales-entregas .tamales-entregas-estilo2{
+background: rgba(232, 248, 4, 0.3); 
+border: 1px solid rgba(200, 100, 0, 0.3);
+}
+.tamales-entregas .tamales-entregas-estilo3{
+    background: rgba(4, 126, 59, 0.3); 
+    border: 1px solid rgba(200, 100, 0, 0.3);
+    }
