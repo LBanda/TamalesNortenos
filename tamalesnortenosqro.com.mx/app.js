@@ -3,7 +3,7 @@ console.log("Hola mundo");
 const express = require('express');
 const app = express();
 
-const rutasPaginaInicio = require('./routes/paginaInicio');
+const rutasTamales = require('./routes/tamales');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -24,7 +24,8 @@ app.use(session({
 
 //Middleware
 
-app.use('/', rutasPaginaInicio);
+app.use('/', rutasTamales);
+app.use('/registro', rutasTamales);
 
 app.use((request, response, next) => {
     console.log('Error 404');
