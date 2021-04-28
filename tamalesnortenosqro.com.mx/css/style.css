@@ -69,7 +69,7 @@ p {
 
 /* Hero */
 .tamales-hero .tamales-hero-text{
-    text-align: right;
+    text-align: center;
     margin-right: 50px;
 }
 .tamales-hero .tamales-hero-text button{
@@ -97,10 +97,18 @@ p {
 }
 .tamales-hero .tamales-hero-text .tamales-hero-titulo{
     padding-top: 150px;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
 }
 .tamales-hero .tamales-hero-text .tamales-hero-entregas{
     padding-top: 50px;
     padding-bottom: 50px;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
 }
 
 
@@ -116,6 +124,10 @@ p {
 .tamales-promociones .tamales-promociones-text {
     text-align: center;
     font-size: 48px;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
 }
 
 .tamales-promociones .tamales-promociones-text .tamales-promociones-text-cabecera {
@@ -130,6 +142,10 @@ p {
     text-align: center;
     padding-top: 3%;
     color: white;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
 }
 .tamales-nuestros-sabores {
     background-color: #F5BD7A;
@@ -138,6 +154,10 @@ p {
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-1{
     display: flex;
     margin-bottom: -1%;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-content-row-1{
     display: flex;
