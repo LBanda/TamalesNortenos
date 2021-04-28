@@ -291,7 +291,7 @@ p {
     border-radius: 55px;
     font-family: Catamaran;
     width: 12%;
-    height: 60px;
+    height: 70px;
 }
 .tamales-usuarioNoRegistrado-02-formulario form {
     display: flex;
@@ -341,8 +341,70 @@ p {
 }
 /* ---------------------- Fin usuarioNoReg-03.html ---------------------- */
 
-/* ---------------------- iniciarSesion.html ---------------------- */
+/* ---------------------- login.html ---------------------- */
+.tamales-login {
+    background-color: #F5BD7A;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 25px;
+    text-align: center;
+    margin-top: -30px;
+    height: 748px;
+}
+.tamales-login .tamales-login-titulo {
+    padding-top: 6%;
+    padding-bottom: 2%;
+    color: white;
+}
 
+/* Se utiliza el css de usuarioNoReg02 para el form del login  */
 
+.tamales-login .tamales-usuarioNoRegistrado-02-formulario-submit{
+    background-color: white;
+    border: none;
+    color: #AFC600;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    border-radius: 55px;
+    font-family: Catamaran;
+    width: 12%;
+    height: 70px;
+}
 
-/* ---------------------- Fin iniciarSesion.html ---------------------- */
+.tamales-login .tamales-usuarioNoRegistrado-02-formulario-submit{
+    background-color: white;
+    border: none;
+    color: #AFC600;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    border-radius: 55px;
+    font-family: Catamaran;
+    width: 12%;
+    height: 70px;
+    margin-top: 1%;
+}
+.tamales-login h4 {
+    font-size: 24px
+}
+.tamales-login .tamales-login-button-registrar{
+    background-color: #AFC600;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    border-radius: 55px;
+    font-family: Catamaran;
+    width: 15%;
+    height: 80px;
+}
+
+/* ---------------------- Fin login.html ---------------------- */

@@ -10,8 +10,13 @@ router.use('/img', express.static(path.join(__dirname, 'public/img')));
 const tamalesController = require('../controllers/tamales-controller');
 
 router.get('/', tamalesController.get);
+
 router.get('/registro', tamalesController.getRegistro);
+
 router.get('/registro02', tamalesController.getRegistro02);
 router.post('/registro02', tamalesController.postRegistro02);
+
+router.get('/login', tamalesController.getLogin);
+router.post('/login', tamalesController.postLogin);
 
 module.exports = router;

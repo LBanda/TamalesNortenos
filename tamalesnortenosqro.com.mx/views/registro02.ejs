@@ -25,7 +25,7 @@
         <div class="tamales-nav-content">
             <div class="tamales-nav-content-up">
                 <a href="/">Página de inicio</a>
-                <a>Iniciar sesión</a>
+                <a href="/login">Iniciar sesión</a>
             </div>
             <div class="tamales-nav-content-pagedivider">
                 <hr>
@@ -39,6 +39,9 @@
             <h1>Ingrese sus datos para su cuenta nueva</h1>
         </div>
         <div class="tamales-usuarioNoRegistrado-02-formulario">
+            <% if (error !== false) { %>
+            <span style="color: red;"> <%- error %></span>
+            <% }%>
             <form action="registro02" method="POST">
                 <label for="nombre"> Nombre </label>
                 <div class="tamales-usuarioNoRegistrado-02-formulario-box">
