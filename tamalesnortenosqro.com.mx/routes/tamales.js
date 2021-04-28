@@ -1,6 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+const isAuth = require('../util/is-auth.js');
+
 path = require('path')
 
 router.use('/css', express.static(path.join(__dirname, 'public/css')));
@@ -18,5 +20,13 @@ router.post('/registro02', tamalesController.postRegistro02);
 
 router.get('/login', tamalesController.getLogin);
 router.post('/login', tamalesController.postLogin);
+
+router.get('/logout', tamalesController.logout);
+
+router.get('/inicio', isAuth, tamalesController.getInicio);
+router.get('/compra01', isAuth, tamalesController.getCompra01);
+router.get('/compra02', isAuth, tamalesController.getCompra02);
+router.get('/compra03', isAuth, tamalesController.getCompra03);
+router.get('/compra04', isAuth, tamalesController.getCompra04);
 
 module.exports = router;

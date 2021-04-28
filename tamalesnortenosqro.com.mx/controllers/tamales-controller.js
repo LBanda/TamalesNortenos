@@ -30,6 +30,12 @@ exports.postRegistro02 = (request, response, next) => {
         });
 };
 
+exports.logout = (request, response, next) => {
+    request.session.destroy(() => {
+        response.redirect('login'); //Este código se ejecuta cuando la sesión se elimina.
+    });
+};
+
 exports.getLogin = (request, response, next) => {
     response.render('login', {
         error: request.session.error !== undefined ? request.session.error : false,
@@ -37,18 +43,20 @@ exports.getLogin = (request, response, next) => {
     });
 };
 
+let nombre;
+
 exports.postLogin = (request, response, next) => {
     request.session.error = undefined;
-
     nuevoCliente.fetchOne(request.body.email)
         .then(([rows, fieldData]) => {
+            nombre = rows[0].nombre;
             bcrypt.compare(request.body.password, rows[0].password)
                 .then(doMatch => {
                     if (doMatch) {
                         request.session.isLoggedIn = true;
                         request.session.user = rows[0].nombre;
                         return request.session.save(err => {
-                            response.redirect('/');
+                            response.redirect('/inicio');
                         });
                     }
                     request.session.error = "Usuario y/o contraseña incorrectos";
@@ -62,4 +70,36 @@ exports.postLogin = (request, response, next) => {
             request.session.error = "Usuario y/o contraseña incorrectos";
             response.redirect('login');
         });
+};
+
+exports.getInicio = (request, response, next) => {
+    response.render('inicio', {
+        usuario: nombre,
+    });
+};
+exports.getCompra01 = (request, response, next) => {
+    response.render('compra01', {
+        usuario: nombre,
+    });
+};
+exports.getCompra02 = (request, response, next) => {
+    response.render('compra02', {
+        usuario: nombre,
+    });
+};
+// exports.postCompra02 = (request, response, next) => {
+//     response.render('compra02', {
+//         usuario: nombre,
+//     });
+// };
+exports.getCompra03 = (request, response, next) => {
+    response.render('compra03', {
+        usuario: nombre,
+    });
+};
+
+exports.getCompra04 = (request, response, next) => {
+    response.render('compra04', {
+        usuario: nombre,
+    });
 };

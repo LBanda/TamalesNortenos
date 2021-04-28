@@ -25,6 +25,10 @@ app.use(session({
 
 app.use('/', rutasTamales);
 app.use('/registro', rutasTamales);
+app.use('/login', rutasTamales);
+app.use('/inicio', rutasTamales);
+app.use('/compra01', rutasTamales);
+app.use('/compra02', rutasTamales);
 
 app.use((request, response, next) => {
     console.log('Error 404');
