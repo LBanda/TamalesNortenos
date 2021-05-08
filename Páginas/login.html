@@ -35,9 +35,9 @@
     <div class="tamales-login">
         <h1 class="tamales-login-titulo">Ingrese los datos de su cuenta</h1>
         <div class="tamales-usuarioNoRegistrado-02-formulario">
-            <% if (error !== false) { %>
+            <!-- <% if (error !== false) { %> -->
             <span style="color: red;"> <%- error %></span>
-            <% }%>
+            <!-- <% }%> -->
             <form action="login" method="POST">
 
                 <label for="email"> Correo electrónico </label>
@@ -60,10 +60,11 @@
         <a href="/registro02">
             <button type="button" class="tamales-login-button-registrar">Registrarse</button>
         </a>
+    </div>
 
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="js/materialize.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="js/materialize.js"></script>
 </body>
 
 </html>

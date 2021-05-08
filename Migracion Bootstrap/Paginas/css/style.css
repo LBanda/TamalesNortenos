@@ -1,0 +1,150 @@
+a{
+    
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    font-family: 'Anton', sans-serif;
+}
+h2 {
+    font-family: 'Catamaran', sans-serif;
+}
+h3 {
+    font-family: 'Roboto', sans-serif;
+}
+h4 {
+    font-family: 'Catamaran', sans-serif;
+}
+ hr {
+    border: 1.2px solid #7E9920;
+} 
+p {
+    font-family: 'Catamaran';
+}
+
+/* ---------------------- Página de inicio ------------------- */
+
+/* -- Hero -- */
+
+.tamales-hero {
+    height: 548px;
+    background-color: #F5BD7A;
+    border-radius: 25px;
+    background-color: rgb(230,133,17,0.6);
+    background-blend-mode: soft-light;
+    background-size: cover;
+    color: white;
+}
+.tamales-hero-context {
+    padding-top: 12%;
+}
+
+.tamales-hero-text {
+    padding-top: 3%;
+}
+
+.tamales-hero-text button {
+    background-color: #AFC600;
+    height: 80px;
+    border-radius: 55px;
+    width: 170px;
+    font-size: 20px;
+}
+
+/* ---------------------- Páginas de registro ------------------- */
+
+.tamales-usuarioNoRegistrado-01,
+.tamales-usuarioNoRegistrado-03,
+.tamales-login{
+    height: 548px;
+    background-color: #F5BD7A;
+    border-radius: 25px;
+    color: white;
+}
+
+.tamales-usuarioNoRegistrado-01-text {
+    margin-bottom: 3%;
+}
+
+.tamales-usuarioNoRegistrado-02 {
+    height: 548px;
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+.tamales-usuarioNoRegistrado-02 form{
+    width: 80%;
+}
+.tamales-usuarioNoRegistrado-02 input{
+    width: 270px;
+}
+
+.tamales-usuarioNoRegistrado-02-button{
+    background-color: #AFC600;
+    height: 80px;
+    border-radius: 55px;
+    width: 150px !important;
+    font-size: 20px;
+    margin-top: 4%;
+}
+.tamales-usuarioNoRegistrado-03 button {
+    margin-top: 3%;
+}
+
+.tamales-login input{
+    width: 270px;
+}
+
+.tamales-login .tamales-login-button input{
+    margin: 5%;
+    background-color: white;
+    height: 50px;
+    border-radius: 55px;
+    width: 150px;
+    font-size: 20px;
+    color: #AFC600;
+}
+
+.tamales-login .tamales-login-button-registrar{
+    margin: 5%;
+    background-color: #AFC600;
+    height: 50px;
+    border-radius: 55px;
+    width: 150px;
+    font-size: 20px;
+    color: white;
+}
+/* ---------------------- Páginas de compra ------------------- */
+
+.tamales-compra01 {
+    /* height: 548px; */
+    background-color: #50310B;
+    opacity: 0.9;
+    background-position: 10px -160px;
+    border-radius: 25px;
+    background-blend-mode: soft-light;
+    background-size: cover;
+    color: white;
+}
+
+.tamales-compra01-text {
+    padding: 5%;
+}
+
+.tamales-compra01-button01{
+    background-color: #E9241F;
+    height: 80px;
+    border-radius: 55px;
+    width: 170px;
+    font-size: 20px;
+}
+
+.tamales-compra01-button02{
+    background-color: #AFC600;
+    height: 80px;
+    border-radius: 55px;
+    width: 170px;
+    font-size: 20px;
+}
+.tamales-compra01-botones {
+    margin-top: 2%;
+    text-align: center;
+}

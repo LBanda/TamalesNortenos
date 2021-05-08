@@ -137,6 +137,9 @@ p {
 }
 .tamales-promociones .tamales-promociones-text {
     text-align: center;
+}
+
+.tamales-promociones .tamales-promociones-text h4{
     font-size: 48px;
 }
 
@@ -179,27 +182,27 @@ p {
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-1-izq{
     position: relative;
-    left: 17.5%;
+    left: 16.5%;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-1-der{
     position: relative;
-    left: 2%;
+    left: 0.5%;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-2-izq{
     position: relative;
-    left: 16.5%;
+    left: 14.5%;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-2-der{
     position: relative;
-    left: 47%;
+    left: 40%;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-3-izq{
     position: relative;
-    left: 16.5%;
+    left: 15.5%;
 }
 .tamales-nuestros-sabores .tamales-nuestros-sabores-titulos-row-3-der{
     position: relative;
-    left: 46.5%;
+    left: 40%;
 }
 
 .tamales-nuestros-sabores-content-texto-izq-row-1,
