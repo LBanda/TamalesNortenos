@@ -83,17 +83,10 @@
 
                     <label for="colonia">Colonia</label>
                     <div class="tamales-usuarioNoRegistrado-02-formulario-box">
-                        <select class="form-control">
-                            <option value="Tejeda">Tejeda</option>
-                            <option value="Jurica">Jurica</option>
-                            <option value="El Refugio">El Refugio</option>
-                            <option value="Juriquilla" selected>Juriquilla</option>
-                            <option value="La Vista">La Vista</option>
-                            <option value="Sonterra">Sonterra</option>
-                            <option value="Balvanegra">Balvanegra</option>
-                            <option value="Zibata">Zibatá</option>
-                            <option value="Campanario">Campanario</option>
-                            <option value="Cimatario">Cimatario</option>
+                        <select class="form-control" name="colonia" required>
+                            <% for (let colonia of distribuciones) {%>
+                            <option value="<%= colonia.nombreDeColonia %>"> <%= colonia.nombreDeColonia %></option>
+                            <% }%>
                         </select>
                     </div>
                 </div>
