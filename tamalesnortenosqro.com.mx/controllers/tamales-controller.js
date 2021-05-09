@@ -18,7 +18,6 @@ exports.postRegistro02 = (request, response, next) => {
     const cliente = new nuevoCliente(request.body.nombre, request.body.apellidos, request.body.telefono, request.body.direccion, request.body.referencia, request.body.email, 8390, request.body.password);
 
     request.session.error = undefined;
-
     cliente.save()
         .then(() => {
             response.render('registro03');
