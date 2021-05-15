@@ -1,9 +1,18 @@
 const nuevoCliente = require('../models/clientes.js');
 const nuevaDistribucion = require('../models/distribucion.js')
+const nuevoProducto = require('../models/producto.js')
 const bcrypt = require('bcryptjs');
 
 exports.get = (request, response, next) => {
-    response.render('paginaInicio');
+    nuevoProducto.fetchAll()
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('paginaInicio', {
+                productos: rows,
+                titulo: "Nuestros Productos"
+            });
+        })
+        .catch(err => console.log(err));
 };
 
 exports.getRegistro = (request, response, next) => {

@@ -65,6 +65,22 @@
         </div>
     </div>
 
+    <div class="container tamales-productos">
+
+        <h1> Nuestros productos </h1>
+
+        <div class="d-flex flex-wrap justify-content-center container tamales-productos-columnas">
+
+            <% for (let producto of productos) {%>
+            <div class="tamales-productos-fila">
+                <h4> <%= producto.nombreProducto %> </h4>
+                <img src="<%= producto.imagenProducto %>" alt="sabor1" />
+                <p> <%= producto.descripcion %></p>
+            </div>
+            <% } %>
+        </div>
+    </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

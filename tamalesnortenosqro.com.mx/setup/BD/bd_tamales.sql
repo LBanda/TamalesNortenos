@@ -1,30 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2021 a las 05:22:33
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 8.0.3
+-- Host: localhost:3306
+-- Generation Time: May 15, 2021 at 04:31 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de datos: `bd/tamales`
+-- Database: `tamalesnortenos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente`
+-- Table structure for table `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -35,26 +28,28 @@ CREATE TABLE `cliente` (
   `correoElectronico` varchar(100) DEFAULT NULL,
   `referenciaDomicilio` varchar(200) DEFAULT NULL,
   `telefono` varchar(12) DEFAULT NULL,
-  `idDistribucion` int(11) NOT NULL
+  `idDistribucion` int(11) NOT NULL,
+  `password` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `cliente`
+-- Dumping data for table `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `nombre`, `apellidos`, `direccion`, `correoElectronico`, `referenciaDomicilio`, `telefono`, `idDistribucion`) VALUES
-(1605, 'Eduardo\'', 'Blanco\'', 'Av. Industrias 403\'', 'Arbol de naranjas en la entrada\'', 'blanco@gmail.com\'', '4425998745\'', 8384),
-(1606, 'Eva\'', 'Espinoza\'', 'Himlaya 501\'', 'Al lado de un dentista\'', 'espinoza@gmail.com\'', '4425874126\'', 8385),
-(1607, 'Gemma\'', 'Frias\'', 'Constitucion 420\'', 'Atras del HEB\'', 'frias@gmail.com\'', '4425896354\'', 8386),
-(1608, 'Pablo\'', 'Farre\'', 'Av. Juarez 60\'', 'Casa rosa\'', 'farre@gmail.com\'', '4425893358\'', 8387),
-(1609, 'Samira\'', 'Llano\'', 'Av. Lopez Mateos 59\'', 'Casa con un domo\'', 'llano@gmail.com\'', '4425896542\'', 8388),
-(1610, 'Angelica\'', 'Ripol\'', 'Emiliano Zapata 83\'', 'Al lado de una pasteleria\'', 'ripol@gmail.com\'', '4425874569\'', 8389),
-(1611, 'Andrea\'', 'Zaragoza\'', '5 de Mayo 852\'', 'Puerta roja con negro\'', 'zaragoza@gmail.com\'', '4425896325\'', 8390);
+INSERT INTO `cliente` (`idCliente`, `nombre`, `apellidos`, `direccion`, `correoElectronico`, `referenciaDomicilio`, `telefono`, `idDistribucion`, `password`) VALUES
+(1600, 'Eduardo\'', 'Blanco\'', 'Av. Industrias 403\'', 'Arbol de naranjas en la entrada\'', 'blanco@gmail.com\'', '4425998745\'', 8384, 'hola123'),
+(1601, 'Eva\'', 'Espinoza\'', 'Himlaya 501\'', 'Al lado de un dentista\'', 'espinoza@gmail.com\'', '4425874126\'', 8385, 'hola123'),
+(1602, 'Gemma\'', 'Frias\'', 'Constitucion 420\'', 'Atras del HEB\'', 'frias@gmail.com\'', '4425896354\'', 8386, 'hola123'),
+(1603, 'Pablo\'', 'Farre\'', 'Av. Juarez 60\'', 'Casa rosa\'', 'farre@gmail.com\'', '4425893358\'', 8387, 'hola123'),
+(1604, 'Samira\'', 'Llano\'', 'Av. Lopez Mateos 59\'', 'Casa con un domo\'', 'llano@gmail.com\'', '4425896542\'', 8388, 'hola123'),
+(1605, 'Angelica\'', 'Ripol\'', 'Emiliano Zapata 83\'', 'Al lado de una pasteleria\'', 'ripol@gmail.com\'', '4425874569\'', 8389, 'hola123'),
+(1606, 'Andrea\'', 'Zaragoza\'', '5 de Mayo 852\'', 'Puerta roja con negro\'', 'zaragoza@gmail.com\'', '4425896325\'', 8390, 'hola123'),
+(1613, 'Javier', 'Martinez', 'Av Eugenio Garza Sada 628', 'javier@itesm.mx', 'Enfrente al Tec de Monterrey', '4499048658', 8384, '$2a$12$0/4ILwOUfk.Wes.ZYbK77uZJlolmt.czDGMEcC8pCrdVqsfzlH6/y');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `descuento`
+-- Table structure for table `descuento`
 --
 
 CREATE TABLE `descuento` (
@@ -64,7 +59,7 @@ CREATE TABLE `descuento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `descuento`
+-- Dumping data for table `descuento`
 --
 
 INSERT INTO `descuento` (`idDescuento`, `descripcion`, `Porcentaje`) VALUES
@@ -79,7 +74,7 @@ INSERT INTO `descuento` (`idDescuento`, `descripcion`, `Porcentaje`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `distribucion`
+-- Table structure for table `distribucion`
 --
 
 CREATE TABLE `distribucion` (
@@ -91,29 +86,29 @@ CREATE TABLE `distribucion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `distribucion`
+-- Dumping data for table `distribucion`
 --
 
 INSERT INTO `distribucion` (`idDistribucion`, `diaDeEntrega`, `nombreDeColonia`, `horaInicioEntrega`, `horaFinalEntrega`) VALUES
-(8384, 'Viernes\'', 'Tejeda\'', '17:00:00', '19:00:00'),
-(8385, 'Miercoles\'', 'Jurica\'', '17:00:00', '19:00:00'),
-(8386, 'Jueves\'', 'El Refugio\'', '17:00:00', '19:00:00'),
-(8387, 'Sábado\'', 'Juriquilla\'', '17:00:00', '19:00:00'),
-(8388, 'Jueves\'', 'La Vista\'', '17:00:00', '19:00:00'),
-(8389, 'Viernes\'', 'Sonterra\'', '17:00:00', '19:00:00'),
-(8390, 'Viernes\'', 'Balvanegra\'', '17:00:00', '19:00:00'),
-(8391, 'Miercoles\'', 'Zibatá\'', '17:00:00', '19:00:00'),
-(8392, 'Jueves\'', 'Zakia\'', '17:00:00', '19:00:00'),
-(8393, 'Viernes\'', 'Vista Real\'', '17:00:00', '19:00:00'),
-(8394, 'Viernes\'', 'Mirador\'', '17:00:00', '19:00:00'),
-(8395, 'Viernes\'', 'Milenio\'', '17:00:00', '19:00:00'),
-(8396, 'Lunes\'', 'Campanario\'', '19:00:00', '20:00:00'),
-(8397, 'Miercoles\'', 'Cimatario\'', '17:00:00', '19:00:00');
+(8384, 'Viernes', 'Tejeda', '17:00:00', '19:00:00'),
+(8385, 'Miercoles', 'Jurica', '17:00:00', '19:00:00'),
+(8386, 'Jueves', 'El Refugio', '17:00:00', '19:00:00'),
+(8387, 'Sábado', 'Juriquilla', '17:00:00', '19:00:00'),
+(8388, 'Jueves', 'La Vista', '17:00:00', '19:00:00'),
+(8389, 'Viernes', 'Sonterra', '17:00:00', '19:00:00'),
+(8390, 'Viernes', 'Balvanegra', '17:00:00', '19:00:00'),
+(8391, 'Miercoles', 'Zibata', '17:00:00', '19:00:00'),
+(8392, 'Jueves', 'Zakia', '17:00:00', '19:00:00'),
+(8393, 'Viernes', 'Vista Real', '17:00:00', '19:00:00'),
+(8394, 'Viernes', 'Mirador', '17:00:00', '19:00:00'),
+(8395, 'Viernes', 'Milenio', '17:00:00', '19:00:00'),
+(8396, 'Lunes', 'Campanario', '19:00:00', '20:00:00'),
+(8397, 'Miercoles', 'Cimatario', '17:00:00', '19:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido`
+-- Table structure for table `pedido`
 --
 
 CREATE TABLE `pedido` (
@@ -130,7 +125,7 @@ CREATE TABLE `pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `pedido`
+-- Dumping data for table `pedido`
 --
 
 INSERT INTO `pedido` (`idPedido`, `etiqueta`, `fechaEntrega`, `estatus`, `descripcion`, `tipoDeEntrega`, `cantidadTotal`, `costoTotal`, `idCliente`, `idPromocion`) VALUES
@@ -188,7 +183,7 @@ INSERT INTO `pedido` (`idPedido`, `etiqueta`, `fechaEntrega`, `estatus`, `descri
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedidoproducto`
+-- Table structure for table `pedidoproducto`
 --
 
 CREATE TABLE `pedidoproducto` (
@@ -199,7 +194,7 @@ CREATE TABLE `pedidoproducto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `pedidoproducto`
+-- Dumping data for table `pedidoproducto`
 --
 
 INSERT INTO `pedidoproducto` (`idProducto`, `idPedido`, `fechaPedido`, `cantidadPorProducto`) VALUES
@@ -336,7 +331,7 @@ INSERT INTO `pedidoproducto` (`idProducto`, `idPedido`, `fechaPedido`, `cantidad
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Table structure for table `producto`
 --
 
 CREATE TABLE `producto` (
@@ -349,7 +344,7 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `producto`
+-- Dumping data for table `producto`
 --
 
 INSERT INTO `producto` (`idProducto`, `NombreProducto`, `Precio`, `Existencia`, `Descripcion`, `ImagenProducto`) VALUES
@@ -363,7 +358,7 @@ INSERT INTO `producto` (`idProducto`, `NombreProducto`, `Precio`, `Existencia`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `promocion`
+-- Table structure for table `promocion`
 --
 
 CREATE TABLE `promocion` (
@@ -376,7 +371,7 @@ CREATE TABLE `promocion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `promocion`
+-- Dumping data for table `promocion`
 --
 
 INSERT INTO `promocion` (`idPromocion`, `descripcion`, `fechaInicio`, `FechaFinal`, `ImagenPromocion`, `idDescuento`) VALUES
@@ -385,29 +380,31 @@ INSERT INTO `promocion` (`idPromocion`, `descripcion`, `fechaInicio`, `FechaFina
 (2003, ' 4 x 1 en tamales colorados \'', '2021-05-20', '2021-06-20', '', 10501);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `cliente`
+-- Indexes for table `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
+  ADD PRIMARY KEY (`idCliente`),
+  ADD UNIQUE KEY `idCliente` (`idCliente`),
+  ADD UNIQUE KEY `correoElectronico` (`correoElectronico`);
 
 --
--- Indices de la tabla `descuento`
+-- Indexes for table `descuento`
 --
 ALTER TABLE `descuento`
   ADD PRIMARY KEY (`idDescuento`);
 
 --
--- Indices de la tabla `distribucion`
+-- Indexes for table `distribucion`
 --
 ALTER TABLE `distribucion`
   ADD PRIMARY KEY (`idDistribucion`);
 
 --
--- Indices de la tabla `pedido`
+-- Indexes for table `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
@@ -415,19 +412,28 @@ ALTER TABLE `pedido`
   ADD KEY `idCliente` (`idCliente`);
 
 --
--- Indices de la tabla `pedidoproducto`
+-- Indexes for table `pedidoproducto`
 --
 ALTER TABLE `pedidoproducto`
   ADD PRIMARY KEY (`idProducto`,`idPedido`,`fechaPedido`),
   ADD KEY `idPedido` (`idPedido`);
 
 --
--- Indices de la tabla `producto`
+-- Indexes for table `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`idProducto`);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1614;
+
+ALTER TABLE `pedido`
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10031;
+

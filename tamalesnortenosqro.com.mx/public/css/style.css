@@ -50,6 +50,31 @@ p {
     font-size: 20px;
 }
 
+.tamales-productos {
+    margin-top: 3%;
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+
+.tamales-productos h1 {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+.tamales-productos .tamales-productos-fila img{
+    width: 50%;
+}
+.tamales-productos .tamales-productos-fila{
+    width: 33.333%;
+    text-align: center;
+}
+.tamales-productos .tamales-productos-fila p{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+
 /* ---------------------- Páginas de registro ------------------- */
 
 .tamales-usuarioNoRegistrado-01,
@@ -115,10 +140,9 @@ p {
 /* ---------------------- Páginas de compra ------------------- */
 
 .tamales-compra01 {
-    /* height: 548px; */
-    background-color: #50310B;
-    opacity: 0.9;
-    background-position: 10px -160px;
+    background-color: #71450F;
+    opacity: 1;
+    background-position: 10px -180px;
     border-radius: 25px;
     background-blend-mode: soft-light;
     background-size: cover;
@@ -130,6 +154,7 @@ p {
 }
 
 .tamales-compra01-button01{
+    margin-top: 5%;
     background-color: #E9241F;
     height: 80px;
     border-radius: 55px;
@@ -138,6 +163,7 @@ p {
 }
 
 .tamales-compra01-button02{
+    margin-top: 5%;
     background-color: #AFC600;
     height: 80px;
     border-radius: 55px;
