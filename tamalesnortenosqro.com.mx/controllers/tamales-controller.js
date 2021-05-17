@@ -1,16 +1,22 @@
 const nuevoCliente = require('../models/clientes.js');
 const nuevaDistribucion = require('../models/distribucion.js')
 const nuevoProducto = require('../models/producto.js')
+const nuevaPromocion = require('../models/promocion.js')
 const bcrypt = require('bcryptjs');
 
 exports.get = (request, response, next) => {
     nuevoProducto.fetchAll()
-        .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('paginaInicio', {
-                productos: rows,
-                titulo: "Nuestros Productos"
-            });
+        .then(([rowsProductos, fieldData]) => {
+            nuevaPromocion.fetchAll()
+                .then(([rowsPromociones, fieldData]) => {
+                    console.log(rowsPromociones);
+                    response.render('paginaInicio', {
+                        productos: rowsProductos,
+                        promociones: rowsPromociones,
+                        titulo: "Tamales norteños"
+                    });
+                })
+                .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
 };
@@ -66,7 +72,6 @@ exports.postRegistro02 = (request, response, next) => {
             break;
     }
     const cliente = new nuevoCliente(request.body.nombre, request.body.apellidos, request.body.telefono, request.body.direccion, request.body.referencia, request.body.email, idColonia, request.body.password);
-
     request.session.error = undefined;
     cliente.save()
         .then(() => {
@@ -122,9 +127,24 @@ exports.postLogin = (request, response, next) => {
 };
 
 exports.getInicio = (request, response, next) => {
-    response.render('inicio', {
-        usuario: nombre,
-    });
+    // response.render('inicio', {
+    //     usuario: nombre,
+    // });
+    nuevoProducto.fetchAll()
+        .then(([rowsProductos, fieldData]) => {
+            nuevaPromocion.fetchAll()
+                .then(([rowsPromociones, fieldData]) => {
+                    console.log(rowsPromociones);
+                    response.render('inicio', {
+                        usuario: nombre,
+                        productos: rowsProductos,
+                        promociones: rowsPromociones,
+                        titulo: "Tamales norteños"
+                    });
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 };
 exports.getCompra01 = (request, response, next) => {
     response.render('compra01', {

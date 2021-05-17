@@ -34,19 +34,62 @@
             <div class="row collapse navbar-collapse nav justify-content-end gx-5" id="navbarNav">
                 <ul class="navbar-nav tamales-navbar-texto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/inicio">
                             <h4>Página de inicio</h4><span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <h4>Iniciar sesión</h4>
+                        <a class="nav-link">
+                            <h4> Bienvenido, <%- usuario %> </h4>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
         <hr>
+    </div>
+
+    <div class="container pt-3 text-center tamales-compra02">
+        <h1 class="tamales-compra02-titulo">Seleccione el número de tamales deseados por sabor</h1>
+        <h4 class="tamales-compra02-descripcion">Pedido mínimo de 15 tamales</h4>
+
+        <div class="d-flex justify-content-around text-center tamales-compra02-productos">
+            <div class="d-flex flex-column tamales-compra02-productos-fila">
+                <h4> Dulce </h4>
+                <img src="img/tamales-sabor-1.png" alt="sabor1" />
+                <input type="number" min="0" name="cantidad-dulce">
+                <h4> Verde de pollo </h4>
+                <img src="img/tamales-sabor-2.png" alt="sabor1" />
+                <input type="number" min="0" name="cantidad-dulce">
+            </div>
+            <div class="d-flex flex-column tamales-compra02-productos-fila">
+                <h4> Chicharrón </h4>
+                <img src="img/tamales-sabor-3.png" alt="sabor1" />
+                <div class="wrapper">
+                    <input type="number" min="0" name="cantidad-dulce">
+                </div>
+                <h4> Colorado </h4>
+                <img src="img/tamales-sabor-4.png" alt="sabor1" />
+                <input type="number" min="0" name="cantidad-dulce">
+            </div>
+            <div class="d-flex flex-column tamales-compra02-productos-fila">
+                <h4> Rajas </h4>
+                <img src="img/tamales-sabor-5.png" alt="sabor1" />
+                <input type="number" min="0" name="cantidad-dulce">
+                <h4> Frijoles norteños </h4>
+                <img src="img/tamales-sabor-6.png" alt="sabor1" />
+                <input type="number" min="0" name="cantidad-dulce">
+            </div>
+        </div>
+        <div class="tamales-compra01-botones">
+            <a href="/inicio">
+                <button type="button" class="btn btn-danger tamales-compra01-button01">Cancelar</button>
+            </a>
+            <a href="/compra02">
+                <button type="button" class="btn btn-success tamales-compra01-button02">Aceptar</button>
+            </a>
+        </div>
+
     </div>
 
 

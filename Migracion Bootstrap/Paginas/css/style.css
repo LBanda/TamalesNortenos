@@ -115,10 +115,9 @@ p {
 /* ---------------------- Páginas de compra ------------------- */
 
 .tamales-compra01 {
-    /* height: 548px; */
-    background-color: #50310B;
-    opacity: 0.9;
-    background-position: 10px -160px;
+    background-color: #71450F;
+    opacity: 1;
+    background-position: 10px -180px;
     border-radius: 25px;
     background-blend-mode: soft-light;
     background-size: cover;
@@ -148,3 +147,22 @@ p {
     margin-top: 2%;
     text-align: center;
 }
+
+.tamales-compra02 {
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+
+
+.tamales-compra02-productos img{
+    width: 180px
+}
+.tamales-compra02-productos-fila h4 {
+    margin-top: 2%;
+}
+input {
+    text-align: center;  
+    border: 1px solid #6C757D;
+  } 
+
+  
