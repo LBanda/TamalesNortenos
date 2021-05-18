@@ -173,15 +173,15 @@ exports.postCompra02 = (request, response, next) => {
             }
             if (total > 14) {
                 response.redirect('compra03');
+            } else {
+                response.redirect('compra02');
             }
-            response.redirect('compra02');
         })
         .catch(err => console.log(err));
 };
 
 
 exports.getCompra03 = (request, response, next) => {
-    console.log("Hola desde compra 3");
     response.render('compra03', {
         usuario: nombre,
         titulo: "Paso 3 compra"
