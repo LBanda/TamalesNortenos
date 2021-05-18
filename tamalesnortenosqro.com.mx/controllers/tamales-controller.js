@@ -9,7 +9,6 @@ exports.get = (request, response, next) => {
         .then(([rowsProductos, fieldData]) => {
             nuevaPromocion.fetchAll()
                 .then(([rowsPromociones, fieldData]) => {
-                    console.log(rowsPromociones);
                     response.render('paginaInicio', {
                         productos: rowsProductos,
                         promociones: rowsPromociones,
@@ -92,7 +91,7 @@ exports.logout = (request, response, next) => {
 
 exports.getLogin = (request, response, next) => {
     response.render('login', {
-        error: request.session.error !== undefined ? request.session.error : false,
+        errorLogin: request.session.error !== undefined ? request.session.error : false,
         titulo: "Iniciar sesion",
     });
 };
@@ -134,7 +133,6 @@ exports.getInicio = (request, response, next) => {
         .then(([rowsProductos, fieldData]) => {
             nuevaPromocion.fetchAll()
                 .then(([rowsPromociones, fieldData]) => {
-                    console.log(rowsPromociones);
                     response.render('inicio', {
                         usuario: nombre,
                         productos: rowsProductos,
@@ -152,22 +150,46 @@ exports.getCompra01 = (request, response, next) => {
     });
 };
 exports.getCompra02 = (request, response, next) => {
-    response.render('compra02', {
-        usuario: nombre,
-    });
+    nuevoProducto.fetchAll()
+        .then(([rows, fieldData]) => {
+            response.render('compra02', {
+                usuario: nombre,
+                productos: rows,
+                titulo: "Paso 2 compra"
+            });
+        })
+        .catch(err => console.log(err));
 };
-// exports.postCompra02 = (request, response, next) => {
-//     response.render('compra02', {
-//         usuario: nombre,
-//     });
-// };
+
+var total = 0;
+exports.postCompra02 = (request, response, next) => {
+    nuevoProducto.fetchAll()
+        .then(([rows, fieldData]) => {
+            for (let producto of rows) {
+                let string = "request.body."
+                let skuProducto = producto.sku;
+                string = string + skuProducto;
+                total += parseInt(eval(string));
+            }
+            if (total > 14) {
+                response.redirect('compra03');
+            }
+            response.redirect('compra02');
+        })
+        .catch(err => console.log(err));
+};
+
+
 exports.getCompra03 = (request, response, next) => {
+    console.log("Hola desde compra 3");
     response.render('compra03', {
         usuario: nombre,
+        titulo: "Paso 3 compra"
     });
 };
 
 exports.getCompra04 = (request, response, next) => {
+    console.log("Hola desde compra 4");
     response.render('compra04', {
         usuario: nombre,
     });
