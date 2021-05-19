@@ -75,6 +75,7 @@ exports.postRegistro02 = (request, response, next) => {
     }
     const cliente = new nuevoCliente(request.body.nombre, request.body.apellidos, request.body.telefono, request.body.direccion, request.body.referencia, request.body.email, idColonia, request.body.password);
     request.session.error = undefined;
+    console.log(cliente);
     cliente.save()
         .then(() => {
             response.render('registro03');
@@ -197,6 +198,9 @@ exports.postCompra02 = (request, response, next) => {
         request.session.error = undefined;
         nuevoProducto.fetchAll()
             .then(([rows, fieldData]) => {
+                descripcion = "";
+                total = 0;
+                costoTotal = 0;
                 for (let producto of rows) {
                     let string = "request.body."
                     let skuProducto = producto.sku;
@@ -226,6 +230,8 @@ exports.postCompra02 = (request, response, next) => {
                         .then(() => {
                             request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
                             descripcion = "";
+                            total = 0;
+                            costoTotal = 0;
                             response.redirect('compra02');
                         })
                         .catch(err => {
@@ -237,6 +243,9 @@ exports.postCompra02 = (request, response, next) => {
     } else {
         return db.execute('DELETE FROM pedido WHERE idPedido = ?', [idPedido])
             .then(() => {
+                descripcion = "";
+                total = 0;
+                costoTotal = 0;
                 response.redirect('inicio');
             })
             .catch(err => {
@@ -251,23 +260,39 @@ exports.getCompra03 = (request, response, next) => {
         titulo: "Paso 3 compra"
     });
 };
-var costoEntrega;
-let tipoEntrega;
+var costoEntrega = 0;
+let tipoEntrega = "";
 exports.postCompra03 = (request, response, next) => {
-    // response.render('compra03', {
-    //     usuario: nombre,
-    //     titulo: "Paso 3 compra"
-    // });
-    tipoEntrega = request.body.entrega;
-    switch (tipoEntrega) {
-        case "domicilio":
-            costoEntrega = 50;
-            break;
-        case "sucursal":
-            costoEntrega = 0;
-            break;
+    if (request.body.aceptar) {
+        siguiente = true;
+    } else {
+        siguiente = false;
     }
-    response.redirect('compra04');
+    if (siguiente) {
+        tipoEntrega = request.body.entrega;
+        switch (tipoEntrega) {
+            case "domicilio":
+                costoEntrega = 50;
+                break;
+            case "sucursal":
+                costoEntrega = 0;
+                break;
+        }
+        response.redirect('compra04');
+    } else {
+        return db.execute('DELETE FROM pedido WHERE idPedido = ?', [idPedido])
+            .then(() => {
+                descripcion = "";
+                total = 0;
+                costoTotal = 0;
+                costoEntrega = 0;
+                tipoEntrega = "";
+                response.redirect('inicio');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 };
 let fechaEntrega = "";
 exports.getCompra04 = (request, response, next) => {
@@ -275,8 +300,9 @@ exports.getCompra04 = (request, response, next) => {
 
     return db.execute('SELECT diaDeEntrega, horaInicioEntrega, horaFinalEntrega FROM distribucion d, pedido p, cliente c WHERE p.idCliente = c.idCliente AND d.idDistribucion = c.idDistribucion AND idPedido = ?', [idPedido])
         .then(([rows, fieldData]) => {
+            fechaEntrega = "";
             fechaEntrega += rows[0].diaDeEntrega + " de " + rows[0].horaInicioEntrega + " a " + rows[0].horaFinalEntrega;
-            const pedidoFinal = new finalizarPedido(fechaEntrega, 'En espera de pago', descripcion, tipoEntrega, total, costoEntrega);
+            const pedidoFinal = new finalizarPedido(fechaEntrega, 'En espera de pago', descripcion, tipoEntrega, total, costoTotal);
             pedidoFinal.save(idPedido)
                 .then(([rows, fieldData]) => {
                     response.render('compra04', {
