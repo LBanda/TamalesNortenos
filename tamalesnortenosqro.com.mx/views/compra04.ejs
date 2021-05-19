@@ -54,7 +54,7 @@
             <h1 class="tamales-usuarioNoRegistrado-01-titulo">¡Muchas gracias por tu pedido!</h1>
             <br>
             <h2> Realizar depósito a la siguiente cuenta bancaria</h2>
-            <h3>Monto: $350</h3>
+            <h3>Monto: $<%- costo %> pesos</h3>
             <br>
             <h4>Nombre del titular : Lorem Ipsum</h4>
             <h4>Clabe : 000000000000000000</h4>
@@ -70,8 +70,9 @@
         </div>
 
         <div class="tamales-compra04-botones">
-            <input class="btn btn-success tamales-compra02-button02" type="submit" name="siguiente"
-                value="Finalizar pedido">
+            <a href="/inicio">
+                <button type="button" class="btn btn-success tamales-compra02-button02">Finalizar pedido</button>
+            </a>
         </div>
     </div>
 

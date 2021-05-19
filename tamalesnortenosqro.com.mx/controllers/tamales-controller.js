@@ -3,6 +3,8 @@ const nuevaDistribucion = require('../models/distribucion.js')
 const nuevoProducto = require('../models/producto.js')
 const nuevaPromocion = require('../models/promocion.js')
 const pedidoProducto = require('../models/pedidoproducto.js')
+const pedidoNuevo = require('../models/iniciarPedido.js')
+const finalizarPedido = require('../models/pedido.js')
 const db = require('../util/database');
 const bcrypt = require('bcryptjs');
 
@@ -148,6 +150,7 @@ exports.getCompra01 = (request, response, next) => {
     });
 };
 var siguiente = true;
+let idPedido;
 exports.postCompra01 = (request, response, next) => {
     if (request.body.aceptar) {
         siguiente = true;
@@ -155,8 +158,10 @@ exports.postCompra01 = (request, response, next) => {
         siguiente = false;
     }
     if (siguiente) {
-        return db.execute('INSERT INTO pedido(idCliente) VALUES(?)', [idCliente])
-            .then(() => {
+        const pedido = new pedidoNuevo(idCliente);
+        pedido.save()
+            .then(([rows, fieldData]) => {
+                idPedido = rows.insertId;
                 response.redirect('compra02');
             })
             .catch(err => {
@@ -180,61 +185,79 @@ exports.getCompra02 = (request, response, next) => {
         .catch(err => console.log(err));
 };
 var total = 0;
+var costoTotal = 0;
 let descripcion = "";
 exports.postCompra02 = (request, response, next) => {
-    request.session.error = undefined;
-    nuevoProducto.fetchAll()
-        .then(([rows, fieldData]) => {
-            var iCounter = 0;
-            for (let producto of rows) {
-                let string = "request.body."
-                let skuProducto = producto.sku;
-                string = string + skuProducto;
-                total += parseInt(eval(string));
-                if (parseInt(eval(string)) > 0) {
-                    var auxiliar = parseInt(eval(string));
-                    var aux = auxiliar.toString();
-                    descripcion += skuProducto + ": " + aux + ", ";
-                    const pedprod = new pedidoProducto(producto.idProducto, 10017, parseInt(eval(string)));
-                    pedprod.save()
+    if (request.body.aceptar) {
+        siguiente = true;
+    } else {
+        siguiente = false;
+    }
+    if (siguiente) {
+        request.session.error = undefined;
+        nuevoProducto.fetchAll()
+            .then(([rows, fieldData]) => {
+                for (let producto of rows) {
+                    let string = "request.body."
+                    let skuProducto = producto.sku;
+                    string = string + skuProducto;
+                    let costo = parseInt(eval(string)) * producto.precio;
+                    total += parseInt(eval(string));
+                    costoTotal += costo;
+                    if (parseInt(eval(string)) > 0) {
+                        var auxiliar = parseInt(eval(string));
+                        var aux = auxiliar.toString();
+                        descripcion += skuProducto + ": " + aux + ", ";
+                        const pedprod = new pedidoProducto(producto.idProducto, idPedido, parseInt(eval(string)));
+                        pedprod.save()
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    }
+                }
+                descripcion = descripcion.slice(0, -2);
+
+                if (total > 14) {
+                    response.redirect('compra03');
+                } else {
+                    return db.execute('DELETE FROM pedidoproducto WHERE idPedido = ?', [idPedido])
                         .then(() => {
+                            request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
+                            descripcion = "";
+                            response.redirect('compra02');
                         })
                         .catch(err => {
                             console.log(err);
                         });
                 }
-            }
-            descripcion = descripcion.slice(0, -2);
-
-            if (total > 14) {
-                response.redirect('compra03');
-            } else {
-                return db.execute('DELETE FROM pedidoproducto WHERE idPedido = ?', [10017])
-                    .then(() => {
-                        request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
-                        descripcion = "";
-                        response.redirect('compra02');
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-            }
-        })
-        .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+    } else {
+        return db.execute('DELETE FROM pedido WHERE idPedido = ?', [idPedido])
+            .then(() => {
+                response.redirect('inicio');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 };
 exports.getCompra03 = (request, response, next) => {
+    const pedido = new pedidoNuevo();
     response.render('compra03', {
         usuario: nombre,
         titulo: "Paso 3 compra"
     });
 };
 var costoEntrega;
+let tipoEntrega;
 exports.postCompra03 = (request, response, next) => {
     // response.render('compra03', {
     //     usuario: nombre,
     //     titulo: "Paso 3 compra"
     // });
-    let tipoEntrega;
     tipoEntrega = request.body.entrega;
     switch (tipoEntrega) {
         case "domicilio":
@@ -246,14 +269,24 @@ exports.postCompra03 = (request, response, next) => {
     }
     response.redirect('compra04');
 };
+let fechaEntrega = "";
 exports.getCompra04 = (request, response, next) => {
-    console.log("Hola desde compra 4");
-    console.log(nombre);
-    console.log(total);
-    console.log(costoEntrega);
-    response.render('compra04', {
-        usuario: nombre,
-    });
+    costoTotal += costoEntrega;
+
+    return db.execute('SELECT diaDeEntrega, horaInicioEntrega, horaFinalEntrega FROM distribucion d, pedido p, cliente c WHERE p.idCliente = c.idCliente AND d.idDistribucion = c.idDistribucion AND idPedido = ?', [idPedido])
+        .then(([rows, fieldData]) => {
+            fechaEntrega += rows[0].diaDeEntrega + " de " + rows[0].horaInicioEntrega + " a " + rows[0].horaFinalEntrega;
+            const pedidoFinal = new finalizarPedido(fechaEntrega, 'En espera de pago', descripcion, tipoEntrega, total, costoEntrega);
+            pedidoFinal.save(idPedido)
+                .then(([rows, fieldData]) => {
+                    response.render('compra04', {
+                        usuario: nombre,
+                        costo: costoTotal
+                    });
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 };
 exports.postCompra04 = (request, response, next) => {
     response.render('compra04', {

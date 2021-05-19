@@ -59,3 +59,19 @@ ALTER TABLE `cliente`
 SELECT cantidadPorProducto, idProducto, fechaPedido
 FROM pedidoproducto
 WHERE idPedido = 10017;
+
+SELECT diaDeEntrega
+FROM distribucion d, pedido p, cliente c
+WHERE p.idCliente = c.idCliente
+AND d.idDistribucion = c.idDistribucion
+AND idPedido = 10016
+
+SELECT horaInicioEntrega
+FROM distribucion d, pedido p, cliente c
+WHERE p.idCliente = c.idCliente
+AND d.idDistribucion = c.idDistribucion
+AND idPedido = 10016
+
+SELECT horaFinalEntrega FROM distribucion d, pedido p, cliente c WHERE p.idCliente = c.idCliente AND d.idDistribucion = c.idDistribucion AND idPedido = 10016
+
+UPDATE pedido SET etiqueta = '20017' WHERE idPedido = 10027;
