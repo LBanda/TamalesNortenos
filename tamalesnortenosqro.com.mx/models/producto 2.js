@@ -13,7 +13,7 @@ module.exports = class nuevoProducto {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        return db.execute('INSERT INTO producto (idCliente, precio, existencia, descripcion, imagenProducto) VALUES (?, ?, ?, ?, ?)',
+        return db.execute('INSERT INTO producto (nombreProducto, precio, existencia, descripcion, imagenProducto) VALUES (?, ?, ?, ?, ?)',
             [this.nombreProducto, this.precio, this.existencia, this.descripcion, this.imagenProducto]
         );
     }

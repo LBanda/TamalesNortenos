@@ -21,4 +21,8 @@ module.exports = class pedidoProducto {
         return db.execute('SELECT * FROM pedidoproducto');
     }
 
+    static delete(id) {
+        return db.execute('DELETE FROM pedidoproducto WHERE id = ?', [id]);
+    }
+
 }

@@ -3,6 +3,7 @@ const nuevaDistribucion = require('../models/distribucion.js')
 const nuevoProducto = require('../models/producto.js')
 const nuevaPromocion = require('../models/promocion.js')
 const pedidoProducto = require('../models/pedidoproducto.js')
+const db = require('../util/database');
 const bcrypt = require('bcryptjs');
 
 exports.get = (request, response, next) => {
@@ -94,11 +95,13 @@ exports.getLogin = (request, response, next) => {
     });
 };
 let nombre;
+let idCliente;
 exports.postLogin = (request, response, next) => {
     request.session.error = undefined;
     nuevoCliente.fetchOne(request.body.email)
         .then(([rows, fieldData]) => {
             nombre = rows[0].nombre;
+            idCliente = rows[0].idCliente;
             bcrypt.compare(request.body.password, rows[0].password)
                 .then(doMatch => {
                     if (doMatch) {
@@ -144,6 +147,26 @@ exports.getCompra01 = (request, response, next) => {
         usuario: nombre,
     });
 };
+var siguiente = true;
+exports.postCompra01 = (request, response, next) => {
+    if (request.body.aceptar) {
+        siguiente = true;
+    } else {
+        siguiente = false;
+    }
+    if (siguiente) {
+        return db.execute('INSERT INTO pedido(idCliente) VALUES(?)', [idCliente])
+            .then(() => {
+                response.redirect('compra02');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    } else {
+        response.redirect('inicio');
+    }
+
+};
 exports.getCompra02 = (request, response, next) => {
     nuevoProducto.fetchAll()
         .then(([rows, fieldData]) => {
@@ -168,10 +191,6 @@ exports.postCompra02 = (request, response, next) => {
                 let skuProducto = producto.sku;
                 string = string + skuProducto;
                 total += parseInt(eval(string));
-                console.log(skuProducto);
-                console.log(producto.idProducto);
-                console.log(parseInt(eval(string)));
-                console.log(eval(string));
                 if (parseInt(eval(string)) > 0) {
                     var auxiliar = parseInt(eval(string));
                     var aux = auxiliar.toString();
@@ -179,7 +198,6 @@ exports.postCompra02 = (request, response, next) => {
                     const pedprod = new pedidoProducto(producto.idProducto, 10017, parseInt(eval(string)));
                     pedprod.save()
                         .then(() => {
-                            console.log("Registro de " + skuProducto);
                         })
                         .catch(err => {
                             console.log(err);
@@ -187,14 +205,19 @@ exports.postCompra02 = (request, response, next) => {
                 }
             }
             descripcion = descripcion.slice(0, -2);
-            console.log(descripcion);
 
             if (total > 14) {
                 response.redirect('compra03');
             } else {
-                request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
-                descripcion = "";
-                response.redirect('compra02');
+                return db.execute('DELETE FROM pedidoproducto WHERE idPedido = ?', [10017])
+                    .then(() => {
+                        request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
+                        descripcion = "";
+                        response.redirect('compra02');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         })
         .catch(err => console.log(err));

@@ -26,6 +26,8 @@ router.get('/logout', tamalesController.logout);
 router.get('/inicio', isAuth, tamalesController.getInicio);
 
 router.get('/compra01', isAuth, tamalesController.getCompra01);
+router.post('/compra01', isAuth, tamalesController.postCompra01);
+
 router.get('/compra02', isAuth, tamalesController.getCompra02);
 router.post('/compra02', isAuth, tamalesController.postCompra02);
 
