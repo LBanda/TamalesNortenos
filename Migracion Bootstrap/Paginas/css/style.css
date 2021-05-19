@@ -50,6 +50,38 @@ p {
     font-size: 20px;
 }
 
+.tamales-productos {
+    margin-top: 3%;
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+
+.tamales-productos h1 {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+.tamales-productos .tamales-productos-fila img{
+    width: 50%;
+}
+.tamales-productos .tamales-productos-fila{
+    width: 33.333%;
+    text-align: center;
+}
+.tamales-productos .tamales-productos-fila p{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.tamales-promociones img
+{
+    height: 548px;
+    border-radius: 25px;
+    filter: contrast(35%);
+}
+
+
 /* ---------------------- Páginas de registro ------------------- */
 
 .tamales-usuarioNoRegistrado-01,
@@ -129,6 +161,7 @@ p {
 }
 
 .tamales-compra01-button01{
+    margin-top: 5%;
     background-color: #E9241F;
     height: 80px;
     border-radius: 55px;
@@ -137,6 +170,7 @@ p {
 }
 
 .tamales-compra01-button02{
+    margin-top: 5%;
     background-color: #AFC600;
     height: 80px;
     border-radius: 55px;
@@ -160,9 +194,58 @@ p {
 .tamales-compra02-productos-fila h4 {
     margin-top: 2%;
 }
-input {
-    text-align: center;  
-    border: 1px solid #6C757D;
-  } 
 
-  
+.tamales-compra02-button01{
+    background-color: #E9241F;
+    height: 80px;
+    border-radius: 55px;
+    width: 170px;
+    font-size: 20px;
+}
+
+.tamales-compra02-button02{
+    background-color: #AFC600;
+    height: 80px;
+    border-radius: 55px;
+    width: 170px;
+    font-size: 20px;
+}
+.tamales-compra03 {
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+.tamales-compra03-botones {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+.tamales-compra03-titulo {
+    text-align: center;
+    color: white;
+    padding-top: 2%;
+}
+
+.tamales-compra03 h3{
+    color:white;
+}
+
+.tamales-compra03-entregas {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.tamales-compra04 {
+    background-color: #F5BD7A;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+.tamales-compra04-texto {
+    padding-top: 2%;
+}
+
+.tamales-compra04-botones {
+    padding-bottom: 2%;
+    text-align: center;
+}

@@ -210,3 +210,42 @@ p {
     width: 170px;
     font-size: 20px;
 }
+.tamales-compra03 {
+    background-color: #F5BD7A;
+    border-radius: 25px;
+}
+.tamales-compra03-botones {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+.tamales-compra03-titulo {
+    text-align: center;
+    color: white;
+    padding-top: 2%;
+}
+
+.tamales-compra03 h3{
+    color:white;
+}
+
+.tamales-compra03-entregas {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.tamales-compra04 {
+    background-color: #F5BD7A;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+.tamales-compra04-texto {
+    padding-top: 2%;
+}
+
+.tamales-compra04-botones {
+    padding-bottom: 2%;
+    text-align: center;
+}

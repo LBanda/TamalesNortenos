@@ -52,7 +52,7 @@
     <div class="container d-flex flex-column justify-content-center align-items-center tamales-login">
         <h1 class="tamales-login-titulo">Ingrese los datos de su cuenta</h1>
         <div class="tamales-usuarioNoRegistrado-02-formulario">
-            <% if (errorLogin !== false) { %>
+            <% if (error !== false) { %>
             <span style="color: red; text-align: center;"> <%- error %></span>
             <% }%>
             <form action="login" method="POST">

@@ -2,6 +2,7 @@ const nuevoCliente = require('../models/clientes.js');
 const nuevaDistribucion = require('../models/distribucion.js')
 const nuevoProducto = require('../models/producto.js')
 const nuevaPromocion = require('../models/promocion.js')
+const pedidoProducto = require('../models/pedidoproducto.js')
 const bcrypt = require('bcryptjs');
 
 exports.get = (request, response, next) => {
@@ -19,7 +20,6 @@ exports.get = (request, response, next) => {
         })
         .catch(err => console.log(err));
 };
-
 exports.getRegistro = (request, response, next) => {
     response.render('registro01');
 };
@@ -82,22 +82,18 @@ exports.postRegistro02 = (request, response, next) => {
             response.redirect('registro02');
         });
 };
-
 exports.logout = (request, response, next) => {
     request.session.destroy(() => {
         response.redirect('login'); //Este código se ejecuta cuando la sesión se elimina.
     });
 };
-
 exports.getLogin = (request, response, next) => {
     response.render('login', {
-        errorLogin: request.session.error !== undefined ? request.session.error : false,
+        error: request.session.error !== undefined ? request.session.error : false,
         titulo: "Iniciar sesion",
     });
 };
-
 let nombre;
-
 exports.postLogin = (request, response, next) => {
     request.session.error = undefined;
     nuevoCliente.fetchOne(request.body.email)
@@ -124,7 +120,6 @@ exports.postLogin = (request, response, next) => {
             response.redirect('login');
         });
 };
-
 exports.getInicio = (request, response, next) => {
     // response.render('inicio', {
     //     usuario: nombre,
@@ -153,6 +148,7 @@ exports.getCompra02 = (request, response, next) => {
     nuevoProducto.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('compra02', {
+                error: request.session.error !== undefined ? request.session.error : false,
                 usuario: nombre,
                 productos: rows,
                 titulo: "Paso 2 compra"
@@ -160,36 +156,83 @@ exports.getCompra02 = (request, response, next) => {
         })
         .catch(err => console.log(err));
 };
-
 var total = 0;
+let descripcion = "";
 exports.postCompra02 = (request, response, next) => {
+    request.session.error = undefined;
     nuevoProducto.fetchAll()
         .then(([rows, fieldData]) => {
+            var iCounter = 0;
             for (let producto of rows) {
                 let string = "request.body."
                 let skuProducto = producto.sku;
                 string = string + skuProducto;
                 total += parseInt(eval(string));
+                console.log(skuProducto);
+                console.log(producto.idProducto);
+                console.log(parseInt(eval(string)));
+                console.log(eval(string));
+                if (parseInt(eval(string)) > 0) {
+                    var auxiliar = parseInt(eval(string));
+                    var aux = auxiliar.toString();
+                    descripcion += skuProducto + ": " + aux + ", ";
+                    const pedprod = new pedidoProducto(producto.idProducto, 10017, parseInt(eval(string)));
+                    pedprod.save()
+                        .then(() => {
+                            console.log("Registro de " + skuProducto);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                }
             }
+            descripcion = descripcion.slice(0, -2);
+            console.log(descripcion);
+
             if (total > 14) {
                 response.redirect('compra03');
             } else {
+                request.session.error = "Su pedido debe de ser mínimo de 15 elementos";
+                descripcion = "";
                 response.redirect('compra02');
             }
         })
         .catch(err => console.log(err));
 };
-
-
 exports.getCompra03 = (request, response, next) => {
     response.render('compra03', {
         usuario: nombre,
         titulo: "Paso 3 compra"
     });
 };
-
+var costoEntrega;
+exports.postCompra03 = (request, response, next) => {
+    // response.render('compra03', {
+    //     usuario: nombre,
+    //     titulo: "Paso 3 compra"
+    // });
+    let tipoEntrega;
+    tipoEntrega = request.body.entrega;
+    switch (tipoEntrega) {
+        case "domicilio":
+            costoEntrega = 50;
+            break;
+        case "sucursal":
+            costoEntrega = 0;
+            break;
+    }
+    response.redirect('compra04');
+};
 exports.getCompra04 = (request, response, next) => {
     console.log("Hola desde compra 4");
+    console.log(nombre);
+    console.log(total);
+    console.log(costoEntrega);
+    response.render('compra04', {
+        usuario: nombre,
+    });
+};
+exports.postCompra04 = (request, response, next) => {
     response.render('compra04', {
         usuario: nombre,
     });

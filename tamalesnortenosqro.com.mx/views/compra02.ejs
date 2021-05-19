@@ -51,6 +51,9 @@
 
     <div class="container pt-3 text-center tamales-compra02 tamales-productos">
         <h1 class="tamales-compra02-titulo">Seleccione el número de tamales deseados por sabor</h1>
+        <% if (error !== false) { %>
+        <span style="color: red; text-align: center;"> <%- error %></span>
+        <% }%>
         <h4 class="tamales-compra02-descripcion">Pedido mínimo de 15 tamales</h4>
 
         <form action="compra02" method="POST">
